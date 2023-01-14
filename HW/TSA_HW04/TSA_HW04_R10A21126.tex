@@ -1,0 +1,1117 @@
+\documentclass[UTF8,a4paper,14pt]{ctexart}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+%for 字體
+%https://tug.org/FontCatalogue/
+% \usepackage[T1]{fontenc}
+% \usepackage{tgbonum}
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage[T1]{fontenc}
+%\usepackage{bm}#粗體
+%\usepackage{boondox-calo}
+\usepackage{textcomp}
+\usepackage{fancyhdr}%导入fancyhdr包
+\usepackage{ctex}%导入ctex包
+\usepackage{enumitem} %for在Latex使用條列式清單
+\usepackage{varwidth}
+\usepackage{soul} %for \ul
+\usepackage{comment}%\begin{comment}\end{comment}
+\usepackage{cancel}%\cancel{}
+%\usepackage{unicode-math}
+\usepackage{physics}% for derivative/partial derivative
+
+\usepackage[dvipsnames, svgnames, x_11names]{xcolor}
+
+\usepackage[low-sup]{subdepth}
+\usepackage{subdepth}
+
+\newcommand{\indep}{\perp \!\!\! \perp}
+
+\usepackage{amsthm}
+
+% \DeclareMathOperator{\E}{\mathbb{E}}
+\newcommand{\E}{{\rm I\kern-.3em E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Corr}{\mathrm{Corr}}
+% \DeclareMathOperator{\Var}{\textbf{Var}}
+% \DeclareMathOperator{\Cov}{\textbf{Cov}}
+% \DeclareMathOperator{\Corr}{\textbf{Corr}}
+
+
+\DeclareMathSizes{10}{10}{7}{5}
+
+\usepackage[a4paper, margin=1.5in]{geometry}
+
+\usepackage{array, makecell} %
+
+
+%中英文設定
+%\usepackage{fontspec}
+% \setmainfont{Computer Modern Sans Serif}
+% \setmainfont{TeX Gyre Termes}
+% \usepackage{xeCJK} %引用中文字的指令集
+%\setCJKmainfont{PMingLiU}
+% \setCJKmainfont{DFKai-SB}
+% \setmainfont{Times New Roman}
+% \setCJKmonofont{DFKai-SB}
+\pagenumbering{arabic}%设置页码格式
+\pagestyle{fancy}
+\fancyhead{} % 初始化页眉
+\fancyhead[C]{TSA\quad HW 04\quad  R10A21126\quad  WANG YIFAN\quad   \today}
+%\fancyhead[LE]{\textsl{\rightmark}}
+%\fancyfoot{} % 初始化页脚
+%\fancyfoot[LO]{奇数页左页脚}
+%\fancyfoot[LE]{偶数页左页脚}
+%\fancyfoot[RO]{奇数页右页脚}
+%\fancyfoot[RE]{偶数页右页脚}
+
+% \title{{Econometrics HW 03}}
+% \author{R10A21126}
+% \date{\today}
+
+%\fancyhf{}
+\usepackage{lastpage}
+\cfoot{Page \thepage \hspace{1pt} of\, \pageref{LastPage}}
+
+\renewcommand{\headrulewidth}{0.1pt}%分隔线宽度4磅
+%\renewcommand{\footrulewidth}{4pt}
+
+\allowdisplaybreaks
+\usepackage[english]{babel}
+%\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+
+\usepackage[most]{tcolorbox}
+% \newtcbtheorem{Problem}{\bfseries Problem}{enhanced,arc= 1 mm,boxrule=0pt,frame hidden,
+%   colback = Pink!50!White,
+%   coltitle=black,
+%   top=0.15in,
+%   attach boxed title to top left=
+%   {xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+%   boxed title style={size=small,colback=LightPink!70!White}
+% }{}
+\definecolor{babyblue}{rgb}{0.54, 0.81, 0.94}
+
+\newtcolorbox[auto counter]{mybox}[1]{
+    enhanced,
+    arc= 1 mm,boxrule=1pt,
+    colframe=pink!90!white,
+    colback=white,
+    coltitle=black,
+    % colback=blue!5!white,
+    attach boxed title to top left=
+    {xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+    boxed title style={size=small,
+    % frame hidden,
+    colback=LightPink!10!White},
+    top=0.15in,
+    % fonttitle=\bfseries,
+    title= {#1},
+    subtitle style={boxrule=0.4pt,
+              colback=yellow!10!red!10!white},
+    breakable
+  }
+\newtcolorbox[auto counter]{Problem}[1]{
+    enhanced,drop shadow={blue!5!white},
+    colframe=babyblue!50!,
+    fonttitle=\bfseries,
+    title=Problem ~\thetcbcounter. #1,
+    %separator sign={.},
+    coltitle=black,
+    colback=blue!3,
+    top=0.15in,
+    breakable
+  }
+
+\newenvironment{solution}
+  {\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[Solution]}
+  {\end{proof}}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+%\theoremstyle{notation}
+\newtheorem*{notation}{\underline{Notation}}
+%\newtheorem*{convention}{\underline{Convention}}
+\newtheorem*{convention}{\underline{Convention}}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\newenvironment{amatrix}[2]{%% [2] for 2 parameters 
+  \left[\begin{array}
+    %{cc|cc}
+    %  {@{}*{#2}{c}|c*{#1}{c}}
+     {{}*{#1}{c}|c*{#2}{c}}
+}{%
+  \end{array}\right]
+}
+% For augmented matrix  
+%https://tex.stackexchange.com/questions/2233/whats-the-best-way-make-an-augmented-coefficient-matrix
+
+
+
+\usepackage{pgfplots}
+\pgfplotsset{width=10cm,compat=1.18}
+% \pgfplotsset{width=10cm,compat=0.9}
+\usepackage{csvsimple}
+\usepackage{enumitem}
+
+
+\begin{document}
+
+\begin{Problem}{}
+    Show that for an MA(1) process
+    \begin{itemize}
+        \item \(\underset{-\infty<\theta<\infty}{\max}\rho_1 = 0.5\)
+        \item \(\underset{-\infty<\theta<\infty}{\min}\rho_1 = -0.5\)
+    \end{itemize}
+    \end{Problem}
+    \begin{mybox}{White Noise Process}
+      The most fundamental example of a stationary process is a sequence of \textbf{independent and identically distributed} random variables, denoted as $\alpha_1, \ldots , \alpha_t, \ldots,$ which we also assume to have \textbf{mean zero} and variance $\sigma_\alpha^2$. This process is strictly stationary and is referred to as a \textbf{white noise process}. Because independence implies that the $\alpha_t$ are uncorrelated, its autocovariance function is simply
+      \[\gamma_k = \E[x_t,x_{t-k}] = \begin{cases}
+          \sigma_\alpha^2 & k = 0\\
+          0               & k \neq0
+      \end{cases}.\]
+      Thus, the autocorrelation function of white noise has a particularly simple form  
+      \[\rho_k = \begin{cases}
+        1 & k = 0\\
+        0 & k \neq0
+    \end{cases}.\]   
+  \end{mybox}
+\begin{solution}\,\\
+  Consider the MA(1) model \(y_t =  a_{t} + \theta  a_{t-1}\).
+  \begin{equation}
+    \E[y_t] = \E[ a_{t} + \theta  a_{t-1}] = 0
+  \end{equation}
+\begin{equation}\
+  \begin{aligned}
+    \gamma_0 
+    &= \Var[y_t] \\
+    &= \Var[a_{t} + \theta  a_{t-1}]\\
+    &= \Var[a_{t}]+\theta^2 \Var[ a_{t-1}]\\
+    &= \Var[a_{t}]+\theta^2\Var[ a_{t-1}]\\
+    &= (1+\theta^2) \sigma_{a}^2
+  \end{aligned}
+\end{equation}
+\begin{equation}\
+  \begin{aligned}
+    \gamma_1 
+    &= \Cov[y_t,y_{t+1}] \\
+    &= \Cov[a_{t} + \theta  a_{t-1},a_{t+1} + \theta  a_{t}]\\
+    &= \Cov[a_{t}, a_{t+1} ]+\Cov[a_{t}, \theta  a_{t}]+\Cov[\theta  a_{t-1},a_{t+1}]+\Cov[\theta  a_{t-1},\theta  a_{t}]\\
+    &= 0+ \theta \sigma_{a}^2+0+0\\
+    &= \theta\sigma_{a}^2
+  \end{aligned}
+\end{equation}
+\begin{equation}\
+  \begin{aligned}
+    \rho_1 &= \frac{\gamma_1}{\gamma_0}\\
+    & = \frac{\theta\sigma_{a}^2}{(1+\theta^2) \sigma_{a}^2}\\
+    & = \frac{\theta}{1+\theta^2}
+  \end{aligned}
+\end{equation}
+\begin{equation}\
+  \begin{aligned}
+    \dv{}{\theta}\rho_1 &= \frac{(1+\theta^2) -\theta(2\theta)}{(1+\theta^2)^2}\\
+    &=\frac{1-\theta^2}{(1+\theta^2)^2}
+    % \\
+    % &\overset{\text{set}}{=}0\\
+  \end{aligned}
+\end{equation}
+Set the first derivative to zero
+\begin{equation}\
+  \begin{aligned}
+    \dv{}{\theta}\rho_1 =\frac{1-\theta^2}{(1+\theta^2)^2}
+    &\overset{\text{set}}{=}0\\
+  \end{aligned}
+\end{equation}
+Solving the equation we have
+\begin{equation}\
+  \begin{aligned}
+    \theta = \pm 1\\
+  \end{aligned}
+\end{equation}
+%Here begins the 2D plot
+% \pgfplotsset{
+%     standard/.style={
+%         % axis x line=middle,
+%         % axis y line=middle,
+%         enlarge x limits=0.15,
+%         enlarge y limits=0.15,
+%         every axis x label/.style={at={(current axis.right of origin)},anchor=north west},
+%         every axis y label/.style={at={(current axis.above origin)},anchor=north east}
+%     }
+% }
+
+So we have
+\begin{equation}\
+  \begin{aligned}
+    \underset{\theta}{\max}\,\rho_1 &= \rho_1(\theta = -1)\\ &= -0.5\\
+    \underset{\theta}{\min}\,\rho_1 &= \rho_1(\theta = 1)\\ &= 0.5
+  \end{aligned}
+\end{equation}
+
+\begin{center}
+  \begin{tikzpicture}
+    \begin{axis}[
+        % standard, 
+        x=0.5cm,
+        y=2cm,
+        ytick distance=0.5,
+        extra y ticks={-0.5,0.5},
+        xtick distance= 10,
+        % xtick=\empty,
+        extra x ticks={-1,1},
+        extra x tick style={grid=both},
+        %  extra y tick labels={$e$},
+        xlabel={$\theta$},
+        ylabel={$\rho_1$},
+        legend pos=south east
+     ] 
+    % \addplot[color=red]{exp(x)};
+    \addplot [color =black,smooth, thick,
+    domain=-6:6,] { x/(1+x*x) };
+    \addlegendentry{\(\frac{\theta}{1+\theta^2}\)}
+    \end{axis}
+    \end{tikzpicture}  
+\end{center}
+
+\end{solution}
+\pagebreak
+\begin{Problem}{}
+    For an AR(2) process \(y_t -1.0 y_{t-1} +0.5 y_{t-2} = a_{t}\):
+    \begin{enumerate}
+        \item Calculate \(\rho_1\).
+        \item Using \(\rho_0\) and \(\rho_1\) as starting values and the difference equation form for the autocorrelation function, calculate the values for \(\rho_{k}\) for \(k = 2,\ldots,15\).
+    \end{enumerate}
+  \end{Problem}
+
+
+
+\begin{solution}\
+  \begin{mybox}{The ACF of an AR(2) Process}
+    For an AR(2) process \(y_t  = \phi_1 y_{t-1} +\phi_2 y_{t-2} + a_{t}\):
+  \begin{equation}\
+    \begin{aligned}
+      \gamma_k &= \Cov[y_t,y_{t+k}]\\
+      &=\Cov[ y_t, (\phi_1 y_{t-1+k} +\phi_2 y_{t-2+k} + a_{t+k})]\\
+      &=\Cov[ y_t, \phi_1 y_{t-1+k}]+\Cov[y_t, \phi_2 y_{t-2+k}] + \Cov[y_t, a_{t+k}]\\
+      &=\Cov[ y_t, \phi_1 y_{t-1+k}]+\Cov[y_t, \phi_2 y_{t-2+k}] + \Cov[( \phi_1 y_{t-1} +\phi_2 y_{t-2} + a_{t}), a_{t+k}]\\
+      % &=\Cov[ y_t, \phi_1 y_{t-1+k}]+\Cov[y_t, \phi_2 y_{t-2+k}] + \Cov[\sum_{j = 0}^{\infty}\  , a_{t+k}]\\
+      &=\phi_1 \gamma_{k-1}+\phi_2 \gamma_{k-2} + \Cov[a_{t}, a_{t+k}]\\
+      & = \begin{cases}
+        \phi_1 \gamma_{k-1}+\phi_2 \gamma_{k-2}+\sigma_a^2&k = 0\\
+        \phi_1 \gamma_{k-1}+\phi_2 \gamma_{k-2} &k \neq0
+      \end{cases}
+      % &=\phi_1 \gamma_{k-1}+\phi_2 \gamma_{k-2} + 0\\
+    \end{aligned}
+  \end{equation}
+  For \(k = 0\)
+  \begin{equation}\
+    \begin{aligned}
+      \Var[y_t] = \gamma_0 
+      &= \phi_1 \gamma_{-1}+\phi_2 \gamma_{-2}+\sigma_a^2 \\
+      &= \phi_1 \gamma_{1}+\phi_2 \gamma_{2}+\sigma_a^2\\
+    \end{aligned}
+  \end{equation}
+  For \(k = 1,2,\ldots\)
+  \begin{equation}\
+    \begin{aligned}\label{eq:3.38}
+     \gamma_k &=  \phi_1 \gamma_{k-1}+\phi_2 \gamma_{k-2}
+    \end{aligned}
+  \end{equation}
+Divide \eqref{eq:3.38} through by \(\gamma_0\) to obtain the difference equation for the ACF of the process:
+\begin{equation}\
+  \begin{aligned}
+    \rho_k &=\phi_1 \rho_{k-1}+\phi_2 \rho_{k-2}\\
+  \end{aligned}
+  \end{equation}
+  For \(k = 1\)
+  \begin{equation}\
+    \begin{aligned}
+      \rho_{1} &= \phi_1\rho_{0}+\phi_2 \rho_{-1}\\
+      \rho_{1} &= \phi_1\rho_{0}+\phi_2 \rho_{1}\\
+      (1-\phi_2)\rho_{1}  &=\phi_1   \\
+      \rho_{1}&=\frac{\phi_1}{1-\phi_2}
+    \end{aligned}
+  \end{equation}
+  using the initial condition \(\rho_{0} = 1\).\\
+  \end{mybox}
+  \pagebreak\noindent
+  For an AR(2) process \(y_t -1.0 y_{t-1} +0.5 y_{t-2} = a_{t}\):
+  \begin{itemize}
+    \item \(\phi_1 = 1\)
+    \item \(\phi_2 = -0.5\)
+  \end{itemize}
+  For \(k = 1,2,\ldots 15\), the difference equation for the ACF of the process:
+  \begin{equation}\
+    \begin{aligned}
+      \rho_k &= \rho_{k-1}+(-0.5)\rho_{k-2}\\
+    \end{aligned}
+    \end{equation}
+  For \(k = 1\)
+  \begin{equation}\
+    \begin{aligned}
+      \rho_{1}&=\frac{1}{1+0.5}=2/3
+    \end{aligned}
+  \end{equation}
+
+  \begin{center}
+    \csvreader[
+tabular = |r|l|,
+table head = \hline k & \(\rho_k\)\\\hline\hline,
+late after line = \\\hline
+]{Q2.csv}
+{k=\k, rk=\rk}{%
+\k & \rk}% 
+  \end{center}
+
+  
+\end{solution}
+
+
+
+\pagebreak
+\begin{Problem}{}
+    Put the following four models in \(B\) notation, and check whether it is stationary and invertible.
+    \begin{enumerate}
+        \item \(y_{t} = a_{t} - 1.3 a_{t-1} + 0.4 a_{t-2}\).
+        \item \(y_{t} - 0.5 y_{t-1} = a_{t} - 1.3 a_{t-1} +0.4 a_{t-2}\)
+        \item \(y_{t} - 1.5 y_{t-1} + 0.6 y_{t-2}= a_{t} \)
+        \item \(y_{t} - y_{t-1} = a_{t} - 0.5 a_{t-1} \)
+    \end{enumerate}
+  \end{Problem}
+  \begin{Problem}{}
+    For each of the models of Problem 3, obtain:
+    \begin{enumerate}[label=(\alph*)]
+      \item The first three \(\psi_{j}\) weights of the model form: \(y_{t} = a_{t}+\psi_{1}a_{t-1}+\psi_{2}a_{t-2}+\cdots\)
+      \item The first three \(\pi_{j}\) weights of the model form: \(y_{t} = \pi_{1}y_{t-1}+\pi_{2}y_{t-2}+\cdots+a_{t}\) 
+      \item \(\Var[y_t]\), assuming that \(\sigma_{a}^2 = 1.0\) 
+    \end{enumerate}
+    \end{Problem}
+    % \pagebreak
+
+\begin{solution}\,
+
+  \begin{mybox}{1. MA(2)}
+    For MA(\(q\)) model
+    \begin{equation}\
+      \begin{aligned}
+        y_t = a_t -\theta_1 a_{t-1} -\theta_2 a_{t-2}-\cdots-\theta_{q}a_{t-q}
+      \end{aligned}
+    \end{equation}
+    Using the backshift operator
+    \begin{equation}\
+      \begin{aligned}
+        (1-\theta_1 B -\theta_2 B^2 -\cdots-\theta_{q}B^{q}) a_t = y_t 
+      \end{aligned}
+    \end{equation}  
+    We define the \textbf{MA characteristic polynomial(moving average operator)}
+
+    % We define the \textbf{moving average operator}
+    \begin{equation}\
+      \begin{aligned}
+       \theta(B) = 1-\theta_1 B -\theta_2 B^2 -\cdots-\theta_{q}B^{q}
+      \end{aligned}
+    \end{equation}
+    and the corresponding \textbf{MA characteristic equation}
+    \begin{equation}\
+      \begin{aligned}
+       \theta(B) = 1-\theta_1 B -\theta_2 B^2 -\cdots-\theta_{q}B^{q} = 0
+      \end{aligned}
+    \end{equation}
+    It can be shown that MA(q) model is \textbf{invertible}; that is, there are coefficients \(\pi_i\) such that
+    \begin{equation}\
+      \begin{aligned}
+       y+t = \pi_1 y_{t-1} +\pi_2 y_{t-2} +\pi_3y_{t-3}+\cdots+a_t
+      \end{aligned}
+    \end{equation}
+    if and only if the roots of the MA characteristic equation exceed 1 in modulus.
+
+
+
+
+    \tcblower
+    For the MA(2) process:
+    \begin{equation}\
+      \begin{aligned}
+        y_{t} = a_{t} - 1.3 a_{t-1} + 0.4 a_{t-2}
+      \end{aligned}
+    \end{equation}
+
+    \tcbsubtitle{B Operator Form}      
+    \begin{equation}\
+      \begin{aligned}
+      y_t &=  \theta(B)a_t \\    
+      &=(1- 1.3 B +0.4 B^2 )a_t
+      \end{aligned}
+    \end{equation}
+    \tcbsubtitle{Stationarity}
+    \begin{equation}\
+      \begin{aligned}
+      \E[y_t]   
+      &=\E[a_{t} - 1.3 a_{t-1} + 0.4 a_{t-2}]\\
+      &=0\quad\text{constant}
+      \end{aligned}
+    \end{equation}
+    \begin{equation}\
+      \begin{aligned}
+        \gamma_k &= \Cov[y_t,y_{t-k}]\\
+        & = \Cov[(a_{t} - 1.3 a_{t-1} + 0.4 a_{t-2}) , (a_{t-k} - 1.3 a_{t-1-k} + 0.4 a_{t-2-k})]\\
+        &=\begin{cases}
+          (1+1.3^2+0.4^2)\sigma_a^2 & k = 0\\
+          (-1.3+(-1.3)0.4)\sigma_a^2 & k = 1\\
+          (-1.3)\sigma_a^2 & k = 2\\
+          0 & k>2
+        \end{cases}
+      \end{aligned}
+    \end{equation}
+    The mean function of \({y_t}\) is constant over time \(t\). The autocovariance function of \({y_t}\) only depends on time lag \(k\). So we conclude that \({y_t}\) is stationary.  
+
+    Moving average processes are always stationary.
+    
+    
+    \tcbsubtitle{Invertibility} 
+    We can obtain the MA characteristic equation 
+    \begin{equation}\
+      \begin{aligned}
+       \theta(B) = 1-1.3 B +0.4 B^2 &= 0\\
+       (1-0.5B)(1-0.8B) = 0
+      \end{aligned}
+    \end{equation}
+    The roots of the MA characteristic equation exceed 1 in modulus. Thus, The MA(2) process is invertible.
+
+    \tcbsubtitle{\(\psi\) weights}
+    \begin{equation}\
+      \begin{aligned}
+        y_{t} = a_{t} - 1.3 a_{t-1} + 0.4 a_{t-2}
+      \end{aligned}
+    \end{equation}
+    \begin{equation}\
+      \begin{aligned}
+        \psi_0&= 1\\
+        \psi_1&= -1.3\\
+        \psi_2&= 0.4\\
+        \psi_3&= 0\\
+      \end{aligned}
+    \end{equation}
+    \tcbsubtitle{\(\pi\) weights}
+    Infinite autoregressive representation
+    \begin{equation}\
+      \begin{aligned}
+        \pi(B)y_t = y_t -\sum_{j=1}^{\infty} \pi_j y_{t-j} =a_t
+      \end{aligned}
+    \end{equation}
+
+    where
+      \begin{equation}\
+        \begin{aligned}
+        \pi(B) = \theta^{-1}(B)
+        \end{aligned}
+      \end{equation}
+      The weights \(\pi\) are determined from the relation \(\theta(B)\pi(B)= 1\) to satisfy
+      % Box p.69
+      \begin{equation}\
+        \begin{aligned}
+        \pi_j = \theta_1\pi_{j-1}+\theta_2\pi_{j-2}+\cdots+\theta_q\pi_{j-q}\quad j>0
+        \end{aligned}
+      \end{equation}
+      with \(\pi_0 = -1, \pi_j = 0\) for \(j<0\), from which the weights \(\pi_j\) can easily be computed recursively in terms of \(\theta_i\)
+      \begin{equation}
+        \begin{aligned}
+        \pi_0 &= -1\\
+        \pi_1 &= \theta_1\pi_{0}+\theta_2\pi_{-1}\\
+        &=(1.3)(-1)+(-0.4)(0)\\
+        &=-1.3\\
+        \pi_2 &= \theta_1\pi_{1}+\theta_2\pi_{0}\\
+        &=(1.3)(-1.3)+(-0.4)(-1)\\
+        &=-1.29\\
+        \pi_3 &= \theta_1\pi_{2}+\theta_2\pi_{1}\\
+        &=(1.3)(-1.29)+(-0.4)(-1.3)\\
+        & = -1.157
+        \end{aligned}
+      \end{equation}
+
+    \tcbsubtitle{Variance}
+    \begin{equation}\
+      \begin{aligned}
+      \Var[y_t] =\gamma_0   
+      &=(1+1.3^2+0.4^2)\sigma_a^2\\
+      &=1+1.3^2+0.4^2\\
+      &=2.85
+      \end{aligned}
+    \end{equation}
+    
+  \end{mybox}
+  \pagebreak
+  \begin{mybox}{2. ARMA(1,2) \,/\, MA(1)}
+    \begin{equation}\
+      \begin{aligned}\label{eq:2}
+        y_t -0.5y_{t-1} = a_t-1.3a_{t-1}+0.4a_{t-2}
+      \end{aligned}
+    \end{equation}
+    \tcbsubtitle{B Operator Form}
+    In operator form
+    \begin{equation}\
+      \begin{aligned}
+       (1-0.5B)y_{t} &= (1-1.3B+0.4B^2)a_t\\
+       (1-0.5B)y_{t} &= (1-0.8B)(1-0.5B)a_t\\
+       \phi(B)y_t &= \theta(B)a_t\\
+       y_t &= \frac{\theta(B)}{\phi(B)}a_t
+      \end{aligned}
+    \end{equation}
+    \tcblower
+    The ARMA(1,2) process can be reduced to an MA(1) preocess.
+    \begin{equation}\
+      \begin{aligned}
+        y_{t} &=(1-0.8B)a_t\\
+       y_t &= \theta(B)a_t\\
+      \end{aligned}
+    \end{equation}
+    \tcbsubtitle{Stationarity}
+
+    A stationary solution to \eqref{eq:2} exists if and only if all the roots of the AR characteristic equation \(\phi(B) = 0\) exceed unity in modulus.
+    \begin{equation}\
+      \begin{aligned}
+        \phi(B)=1-0.5B&=0\\
+        B&=2
+      \end{aligned}
+    \end{equation}
+    The root of the AR characteristic equation \(\phi(B) = 0\) exceed unity in modulus. Thus, the process is stationary.
+    % \tcblower
+
+    An MA process is always stationary.
+
+    \tcbsubtitle{Invertibility}
+    The roots of \(\theta(B) = 0\) must lie outside the unity circle if the process is to be invertible.
+    \begin{equation}\
+      \begin{aligned}
+        \theta(B)=1-1.3B+0.4B^2&=0\\
+        (1-0.8B)(1-0.5B)&=0\\
+      \end{aligned}
+    \end{equation}
+    \begin{equation}\
+      \begin{aligned}
+        B_1 &=2.0\\
+        B_2 &= 1.25
+      \end{aligned}
+    \end{equation}
+    The root of the MA characteristic equation \(\theta(B) = 0\) exceed unity in modulus. Thus, the process is invertible.
+      
+    \tcbsubtitle{\(\psi\) weights}
+    %Box P76
+    Moving average representation
+    \begin{equation}\
+      \begin{aligned}
+      y_t = \psi(B)a_t =\sum_{j = 0}^{\infty} \psi_j a_{t-j} 
+      \end{aligned}
+    \end{equation}
+    where
+      \begin{equation}\
+        \begin{aligned}
+        \psi(B) = \frac{\theta(B)}{\phi(B)}
+        \end{aligned}
+      \end{equation}
+      The weights \(\psi\) are determined from the relation \(\psi(B) \phi(B)= \theta(B)\) to satisfy
+      \begin{equation}\
+        \begin{aligned}
+        \psi_j = \phi_1\psi_{j-1}+\phi_2\psi_{j-2}+\cdots+\phi_p\psi_{j-p}-\theta_j\quad j>0
+        \end{aligned}
+      \end{equation}
+      with \(\psi_0 = 1, \psi_j = 0\) for \(j<0\), and \(\theta_j = 0\) for \(j>q\)
+      \begin{equation}\
+        \begin{aligned}
+        \psi_0 &= 1\\
+        \psi_1 &= \phi_1\psi_0-\theta_1\\
+        &=(0.5)(1)-(1.3)\\
+        &=-0.8\\
+        \psi_2 &= \phi_1\psi_1-\theta_2\\
+        &=(0.5)(-0.8)-(-0.4)\\
+        &=0\\
+        \psi_3 &= \phi_1\psi_2-\theta_3\\
+        &=(0.5)(0)-(0)\\
+        &=0
+      \end{aligned}
+      \end{equation}
+
+    \tcbsubtitle{\(\pi\) weights}
+    Infinite autoregressive representation
+    \begin{equation}\
+      \begin{aligned}
+        \pi(B)y_t = y_t -\sum_{j=1}^{\infty} \pi_j y_{t-j} =a_t
+      \end{aligned}
+    \end{equation}
+
+    where
+      \begin{equation}\
+        \begin{aligned}
+        \pi(B) = \frac{\phi(B)}{\theta(B)}
+        \end{aligned}
+      \end{equation}
+      The weights \(\pi\) are determined from the relation \(\theta(B)\pi(B)= \phi(B)\) to satisfy
+      \begin{equation}\
+        \begin{aligned}
+        \pi_j = \theta_1\pi_{j-1}+\theta_2\pi_{j-2}+\cdots+\theta_q\pi_{j-q}+\phi_j\quad j>0
+        \end{aligned}
+      \end{equation}
+      with \(\pi_0 = -1, \pi_j = 0\) for \(j<0\), and \(\phi_j = 0\) for \(j>p\)
+      \begin{equation}
+        \begin{aligned}
+        \pi_0 &= -1\\
+        \pi_1 &= \theta_1\pi_{0}+\theta_2\pi_{-1}+\phi_1\\
+        &=(1.3)(-1)+(-0.4)(0)+(0.5)\\
+        &=-0.8\\
+        \pi_2 &= \theta_1\pi_{1}+\theta_2\pi_{0}+\phi_2\\
+        &=(1.3)(-0.8)+(-0.4)(-1)+(0)\\
+        &=-0.64\\
+        \pi_3 &= \theta_1\pi_{2}+\theta_2\pi_{1}+\phi_3\\
+        &=(1.3)(-0.64)+(-0.4)(-0.8)+(0)\\
+        & = -0.512
+        \end{aligned}
+      \end{equation}
+
+      \tcbsubtitle{Variance}
+      \begin{equation}\
+        \begin{aligned}
+          \Var[y_t] &= \Var[\sum_{j = 0}^{\infty} \psi_j a_{t-j} ]\\
+          &=(\psi_0^2+\psi_1^2+\cdots)\,\Var[ a_{t} ]\\
+          &=1^2+(-0.8)^2\\
+          &=1.64
+        \end{aligned}
+      \end{equation}
+
+    
+  \end{mybox}
+  \pagebreak
+
+  \begin{mybox}{3. AR(2)}
+    An autoregressive model of order \(p\), abbreviated AR(\(p\)), is of the form
+    \begin{equation}\
+      \begin{aligned}
+        y_t = \phi_1 y_t{t-1}+\phi_2 y_t{t-2} +\cdots+\phi_p y_t{t-p}+a_t.
+      \end{aligned}
+    \end{equation}
+    Using the backshift operator
+    \begin{equation}\
+      \begin{aligned}
+        (1-\phi_1 B -\phi_2 B^2 -\cdots-\phi_{q}B^{q}) y_t = a_t 
+      \end{aligned}
+    \end{equation}  
+    We define the \textbf{AR characteristic polynomial (autoregressive operator)}
+    \begin{equation}\
+      \begin{aligned}
+       \phi(B) = 1-\phi_1 B -\phi_2 B^2 -\cdots-\phi_{q}B^{q}
+      \end{aligned}
+    \end{equation}
+    and the corresponding \textbf{AR characteristic equation}
+    \begin{equation}\
+      \begin{aligned}
+       \phi(B) = 1-\phi_1 B -\phi_2 B^2 -\cdots-\phi_{q}B^{q} = 0
+      \end{aligned}
+    \end{equation}
+    The process \(\phi(B)y_t = a_t  \) can be written as
+    \begin{equation}\
+      \begin{aligned}
+        y_t =\phi^{-1}(B) a_t
+        &\equiv \psi (B) a_t
+        = \sum_{j = 0}^{\infty}  \psi_ja_{t-j}
+      \end{aligned}
+    \end{equation}
+    provided that the right-side expression is convergent. Using the factorization
+    \begin{equation}\
+      \begin{aligned}
+        \phi(B) = (1-G_1 B)(1-G_2 B)\cdots(1-G_p B)
+      \end{aligned}
+    \end{equation}
+    where \(G_1^{-1}, G_2^{-1},\ldots, G_p^{-1}\) are the roots of equation \(\phi(B) = 0\), and expanding \(\phi^{-1}(B)\) in partial fractions yields
+    \begin{equation}\
+      \begin{aligned}
+        y_t &=\phi^{-1}(B) a_t = \sum_{i = 1}^{p}\frac{K_i}{1-G_i B} a_t  
+      \end{aligned}
+    \end{equation}
+    Hence, if \(\psi(B) =\phi^{-1}(B) \) is to be convergent series for \(\left\lvert B\right\rvert<1 \), that is if the weights \(\psi_j = \sum_{i=1}^{\infty} K_i G_i^j  \) are to be absolutely summable so that AR(\(p\)) process is stationary, we must have \(\left\lvert G_i\right\rvert <1\), for \(i = 1,\ldots,p\). Equivalently, the roots of the \textbf{AR characteristic equation} \(\phi(B) = 0\) must lie outside the unity circle. 
+    \tcblower
+    For the AR(2) preocess:
+    \begin{equation}\
+      \begin{aligned}
+        y_{t} - 1.5 y_{t-1} + 0.6 y_{t-2}= a_{t} 
+      \end{aligned}
+    \end{equation}
+
+
+
+
+    \tcbsubtitle{B Operator Form}
+    \begin{equation}\
+      \begin{aligned}
+        \phi(B)y_t = (1-1.5B+0.6B^2)y_{t} = a_{t} 
+      \end{aligned}
+    \end{equation}
+
+    \tcbsubtitle{Stationarity}
+    For stationarity, the roots of 
+    \begin{equation}\
+      \begin{aligned}
+        \phi(B)=1-1.5B+0.6B^2=0
+      \end{aligned}
+    \end{equation}
+    must lie outside the unity circle, which implies that the parameters \(\phi_1, \phi_2\) must lie in the triangular region
+    \begin{equation}\
+      \begin{aligned}
+        \phi_2+\phi_1&<1\\
+        \phi_2-\phi_1&<1\\
+        -1<\phi_2&<1\\
+      \end{aligned}
+    \end{equation}
+    Check
+    \begin{equation}\
+      \begin{aligned}
+        -0.6+1.5=0.9&<1\\
+        -0.6-1.5=-2.1&<1\\
+        -1<-0.6&<1\\
+      \end{aligned}
+    \end{equation}
+    Therefore, the process is stationary
+    
+    \tcbsubtitle{Invertibility}
+    Pure AR models are always invertible (since they contain no MA terms).
+
+    Thus, the process is invertible.
+
+
+
+    \tcbsubtitle{\(\psi\) weights}
+    Infinite moving average representation
+    \begin{equation}\
+      \begin{aligned}
+      y_t = \psi(B)a_t =\sum_{j = 0}^{\infty} \psi_j a_{t-j} 
+      \end{aligned}
+    \end{equation}
+    where
+      \begin{equation}\
+        \begin{aligned}
+        \psi(B) = \frac{1}{\phi(B)}
+        \end{aligned}
+      \end{equation}
+      The weights \(\psi\) are determined from the relation \(\psi(B) \phi(B)= 1\) to satisfy
+      \begin{equation}\
+        \begin{aligned}
+        \psi_j = \phi_1\psi_{j-1}+\phi_2\psi_{j-2}+\cdots+\phi_p\psi_{j-p}\quad j>0
+        \end{aligned}
+      \end{equation}
+      with \(\psi_0 = 1, \psi_j = 0\) for \(j<0\), from which the weights \(\psi_j\) can be computed recursively in terms of the \(\phi_i\).
+      \begin{equation}\
+        \begin{aligned}
+        \psi_0 &= 1\\
+        \psi_1 &= \phi_1\psi_0+\phi_2\psi_{-1}\\
+        &=(1.5)(1)+(-0.6)(0)\\
+        &=1.5\\
+        \psi_2 &= \phi_1\psi_1+\phi_2\psi_{0}\\
+        &=(1.5)(1.5)+(-0.6)(1)\\
+        &=1.65\\
+        \psi_3 &= \phi_1\psi_2+\phi_2\psi_{1}\\
+        &=(1.5)(1.65)+(-0.6)(1.5)\\
+        &=1.575
+      \end{aligned}
+      \end{equation}
+
+
+    \tcbsubtitle{\(\pi\) weights}
+    \begin{equation}\
+      \begin{aligned}
+        y_t &= 1.5y_{t-1}-0.6y_{t-2}+a_{t}
+      \end{aligned}
+    \end{equation}
+    \begin{equation}\
+      \begin{aligned}
+        \pi_0&= -1\\
+        \pi_1&= 1.5\\
+        \pi_2&= -0.6\\
+        \pi_3&= 0\\
+      \end{aligned}
+    \end{equation}
+    
+    \tcbsubtitle{Variance}
+    The variance of AR(2) process is
+    \begin{equation}\
+      \begin{aligned}
+        \Var[y_t] &= \frac{\sigma_a^2}{1-\rho_1\phi_1-\rho_2\phi_2}\\
+        &= \frac{1-\phi_2}{1+\phi_2}\frac{\sigma_a^2}{(1-\phi_2)^2-\phi_1^2}
+      \end{aligned}
+    \end{equation}
+    So we have
+    \begin{equation}
+      \begin{aligned}
+        \Var[y_t] &= \frac{1+0.6}{1-0.6}\frac{1}{(1+0.6)^2-(-1.5)^2}
+      \end{aligned}
+    \end{equation}
+    
+  \end{mybox}
+  \pagebreak
+
+  \begin{mybox}{4. ARMA(1,1)}
+    \begin{equation}
+      \begin{aligned}
+        y_t -y_{t-1} &= a_t -0.5a_{t-1} 
+      \end{aligned}
+    \end{equation}
+    \tcbsubtitle{B Operator Form}
+    \begin{equation}
+    \begin{aligned}
+      (1-B)y_t &= (1-0.5B) a_t \\
+      \phi(B)y_t &=  \theta(B)a_{t}\\
+    \end{aligned}
+  \end{equation}
+    \tcbsubtitle{Stationarity}
+    \begin{equation}
+    \begin{aligned}
+      \phi(B)= 1-B =0
+    \end{aligned}
+  \end{equation}
+  The root of the AR characteristic equation does not lie outside the unity circle. Thus the process is not stationary.
+
+    \tcbsubtitle{Invertibility}
+    \begin{equation}
+      \begin{aligned}
+        \theta(B)= 1-0.5B =0
+      \end{aligned}
+    \end{equation}
+    The root of the MA characteristic equation \(B=2\) lie outside the unity circle. Thus the process is invertible.
+  
+    \tcbsubtitle{\(\psi\) weights}
+    Infinite moving average representation
+    \begin{equation}
+      \begin{aligned}
+      y_t = \psi(B)a_t =\sum_{j = 0}^{\infty} \psi_j a_{t-j} 
+      \end{aligned}
+    \end{equation}
+    
+    \begin{equation}
+      \begin{aligned}
+        y_t &=  y_{t-1}+a_t -0.5a_{t-1} \\
+        &=y_{t-2}+a_{t-1}-0.5a_{t-2}+a_t -0.5a_{t-1}\\
+        &=y_{t-3}+a_{t-2}-0.5a_{t-3} +a_{t-1}-0.5a_{t-2}+a_t -0.5a_{t-1}\\
+        &
+        \vdots\\
+        &=a_{t}+\cdots+0.5a_{t-1}+0.5a_{t-2}+\cdots+0.5a_{1}+0.5a_{0}+\cdots-0.5a_{t-\infty}\\
+      \end{aligned}
+    \end{equation}
+    \begin{equation}\
+      \begin{aligned}
+      \psi_0 &= 1\\
+      \psi_1 &= 0.5\\
+      \psi_2 &= 0.5\\
+      \psi_3 &= 0.5\\
+    \end{aligned}
+    \end{equation}
+    
+
+    \tcbsubtitle{\(\pi\) weights}
+    Infinite autoregressive representation
+    \begin{equation}\
+      \begin{aligned}
+        \pi(B)y_t = y_t -\sum_{j=1}^{\infty} \pi_j y_{t-j} =a_t
+      \end{aligned}
+    \end{equation}
+
+    where
+      \begin{equation}\
+        \begin{aligned}
+        \pi(B) = \frac{\phi(B)}{\theta(B)}
+        \end{aligned}
+      \end{equation}
+      The weights \(\pi\) are determined from the relation \(\theta(B)\pi(B)= \phi(B)\) to satisfy
+      \begin{equation}\
+        \begin{aligned}
+        \pi_j = \theta_1\pi_{j-1}+\theta_2\pi_{j-2}+\cdots+\theta_q\pi_{j-q}+\phi_j\quad j>0
+        \end{aligned}
+      \end{equation}
+      with \(\pi_0 = -1, \pi_j = 0\) for \(j<0\), and \(\phi_j = 0\) for \(j>p\)
+      \begin{equation}
+        \begin{aligned}
+        \pi_0 &= -1\\
+        \pi_1 &= \theta_1\pi_{0}+\phi_1\\
+        &=(0.5)(-1)+(1)\\
+        &=0.5\\
+        \pi_2 &= \theta_1\pi_{1}+\phi_2\\
+        &=(0.5)(0.5)+(0)\\
+        &=0.25\\
+        \pi_3 &= \theta_1\pi_{2}+\phi_3\\
+        &=(0.5)(0.25)+(0)\\
+        & = 0.125
+        \end{aligned}
+      \end{equation}
+
+    \tcbsubtitle{Variance}
+      % Box p.79
+    \begin{equation}\
+      \begin{aligned}
+        \Var[y_t] = \gamma_0 &=  \Var[y_{t-1}+a_t -0.5a_{t-1} ]\\
+        &=\Var[y_{t-1}]+0.25\sigma_a^2
+      \end{aligned}
+    \end{equation}
+
+    Finite form:
+    \begin{equation}
+      \begin{aligned}
+        y_t &=  y_{t-1}+a_t -0.5a_{t-1} \\
+        &=y_{t-2}+a_{t-1}-0.5a_{t-2}+a_t -0.5a_{t-1}\\
+        &=y_{t-3}+a_{t-2}-0.5a_{t-3} +a_{t-1}-0.5a_{t-2}+a_t -0.5a_{t-1}\\
+        &
+        \vdots\\
+        &=y_0 +a_t+0.5a_{t-1}+0.5a_{t-2}+\cdots+0.5a_{1}-0.5a_{0}\\
+      \end{aligned}
+    \end{equation}
+    where \(y_0\) is a constant.
+    Thus, we have
+    \begin{equation}
+      \begin{aligned}
+        \Var[y_t] &= \Var[y_0 +a_t+0.5a_{t-1}+0.5a_{t-2}+\cdots+0.5a_{1}-0.5a_{0}]\\ 
+        &=(1+0.25t)\sigma_a^2\\
+        &=1+0.25t.
+      \end{aligned}
+    \end{equation}
+
+    Infinite form:
+
+    \begin{equation}
+      \begin{aligned}
+        y_t 
+        % &=  y_{t-1}+a_t -0.5a_{t-1} \\
+        % &=y_{t-2}+a_{t-1}-0.5a_{t-2}+a_t -0.5a_{t-1}\\
+        % &=y_{t-3}+a_{t-2}-0.5a_{t-3} +a_{t-1}-0.5a_{t-2}+a_t -0.5a_{t-1}\\
+        % &
+        % \vdots\\
+        &=a_{t}+\cdots+0.5a_{t-1}+0.5a_{t-2}+\cdots+0.5a_{1}+0.5a_{0}+\cdots-0.5a_{-\infty}\\
+      \end{aligned}
+    \end{equation}
+    
+    We can obtain that
+    \begin{equation}
+      \begin{aligned}
+        \Var[y_t] &= \Var[a_{t}+\cdots+0.5a_{t-1}+0.5a_{t-2}+\cdots+0.5a_{1}+0.5a_{0}+\cdots-0.5a_{-\infty}]\\ 
+        &=(1+\sum_{i = 1}^{\infty} 0.25 )\sigma_a^2\\
+        &=1+\sum_{i = 1}^{\infty} 0.25 \\
+        &=1+ (0.25)\infty.
+      \end{aligned}
+    \end{equation}
+
+
+    
+  \end{mybox}
+\end{solution}
+
+\pagebreak
+\begin{Problem}{}
+  Consider \(y_t\) a stationary preocess. Show that if \(\rho_1<0.5\), \((1-B)y_{t}\) has a larger variance than does \(y_t\).
+\end{Problem}
+\begin{solution}
+  \begin{equation}\
+    \begin{aligned}
+     \Var[(1-B)y_{t}] &= \Var[y_{t}-y_{t-1}]\\
+     &=\Var[y_{t}]+\Var[y_{t-1}]-2\Cov[y_{t},y_{t-1}]\\
+     &=\gamma_0+\gamma_0-2\gamma_1\\
+     &=(2-2\rho_1)\gamma_0\\
+     &=\underset{>1}{\underbrace{2(1-\rho_1)}}\gamma_0\\
+     &>\gamma_0\\
+    \end{aligned}
+  \end{equation}
+  We then conclude that \((1-B)y_{t}\) has a larger variance than does \(y_t\).
+\end{solution}
+\pagebreak
+\begin{Problem}{}
+  Consider an AR(1) process satisfying \(y_t = \phi y_{t-1}+e_t\), where \(\phi\) can be \textbf{any} number and \(e_t\) is a white noise process such that \(e_t\) is independent of the past \(y_{t-1},y_{t-2},\ldots\). Let \(y_0\) be a random variable with mean \(\mu_0\) and variance \(\sigma_0\).
+  \begin{enumerate}[label=(\alph*)]
+    \item For \(t>0\), show that 
+    \[y_t = e_t+\phi^2 e_{t-2}+\phi^3 e_{t-3}+\cdots+\phi^{t-1} e_{1}+\phi^{t}y_0\]
+    \item Show that \(\E[y_t] =\phi^t \mu_0 \), for \(t>0\).
+    \item Show that for \(t>0\), we have
+    \[Var[y_t] = \begin{cases}
+      \frac{1-\phi^{2t}}{1-\phi^{2}}\sigma_e^2+\phi^{2t}\sigma_0^2 & \phi\neq 1\\
+      t\sigma_e^2 +\sigma_0^2 & \phi= 1.
+    \end{cases}\]
+    \item Assuming \(\mu_0 = 0\), show that, we must have \(\phi\neq 1\) to make \(y_t\) stationary.\label{item:d}
+    \item following \ref{item:d} and supposing that \(\mu_0 = 0\) and \(y_t\) is stationary, show that \(\Var[y_t] = \frac{\sigma_e^2}{1-\phi^{2}}\) and we must have \(\left\lvert \phi\right\rvert <1\).
+  \end{enumerate}
+\end{Problem}
+\begin{solution}\,
+  \begin{enumerate}[label=(\alph*)]
+    \item \begin{equation}
+      \begin{aligned}
+        y_t &= \phi y_{t-1}+e_t\\
+        &= \phi (\phi y_{t-2}+e_{t-1})+e_t\\
+        &= \phi^2 y_{t-2} + \phi e_{t-1} + e_t\\
+        &= \phi^2 (\phi y_{t-3}+e_{t-2}) + \phi e_{t-1}+e_t\\
+        &= \phi^3  y_{t-3} + \phi ^2 e_{t-2} + \phi e_{t-1}+e_t\\     
+        &\vdots\\
+        &=\phi^t  y_{0} + \phi ^{t-1} e_{1}+\cdots + \phi e_{t-1}+e_t\\ 
+      \end{aligned}
+    \end{equation}
+    as required.
+    \item \begin{equation}
+      \begin{aligned}
+        \E[y_t] &=\E[\phi^t  y_{0} + \phi ^{t-1} e_{1}+\cdots + \phi e_{t-1}+e_t]\\ 
+        &=\E[\phi^t  y_{0}]\\
+        &=\phi^t \E[y_{0}]\\
+        &=\phi^t \mu_0\\
+      \end{aligned}
+    \end{equation}
+    \item \begin{equation}
+      \begin{aligned}
+        \Var[y_t] &=\Var[\phi^t  y_{0} + \phi ^{t-1} e_{1}+\cdots + \phi e_{t-1}+e_t]\\ 
+        &=\phi^{2t}\sigma_0^2 + (\phi^{0}+\phi^{2}+\phi^{4} +\phi^{6} +\phi^{2(t-1)})\sigma_{e}^2 \\
+        &=\phi^{2t}\sigma_0^2 +\sigma_{e}^2\sum_{k = 0}^{t-1} \phi^{2k} \\  
+        &= \begin{cases}
+          \phi^{2t}\sigma_0^2+\frac{1-\phi^{2t}}{1-\phi^{2}}\sigma_e^2 & \phi\neq 1\\
+          \sigma_0^2+t\sigma_e^2  & \phi= 1.
+        \end{cases}      
+      \end{aligned}
+    \end{equation}
+    \begin{mybox}{Geometric Series}
+      The sum of a \(n\)-term (finite) geometric series is given by:
+      \begin{equation*}
+        \begin{aligned}
+          S_n = \begin{cases}
+            \frac {a_1(1-r^{n})}{1-r} & r\neq 1\\
+            a_1n & r = 1
+          \end{cases}      
+        \end{aligned}
+      \end{equation*}
+      with initial value \(a = a_1\) and common ratio \(r\).
+    \end{mybox}
+    \item If \(\phi =1\), we have
+    \begin{equation*}
+      \begin{aligned}
+        \Var[y_t] &= \Var[y_{t-1}+e_t]  \\
+        &=\Var[y_{t-1}]+\sigma_e^2    
+      \end{aligned}
+    \end{equation*}
+    which is against the stationarity. Therefore, we must have \(\phi\neq 1\) to make \(y_t\) stationary.
+    \item \begin{equation*}
+      \begin{aligned}
+        \Var[y_t] &= \Var[\phi y_{t-1}+e_t]  \\
+        &=\phi^2\Var[y_{t-1}]+\sigma_e^2    
+      \end{aligned}
+    \end{equation*}
+    Due to the requirement of stationarity, we have
+    \begin{equation*}
+      \begin{aligned}
+        \Var[y_t] 
+        &=\phi^2\Var[y_{t}]+\sigma_e^2   \\ 
+        (1-\phi^2)\Var[y_{t}]&=\sigma_e^2   \\
+        \Var[y_{t}]&=\frac{\sigma_e^2 }{1-\phi^2}  \\ 
+      \end{aligned}
+    \end{equation*}
+    Since the variance \(\Var[y_t]\) must be positive, we must have \(\left\lvert \phi\right\rvert <1\).
+  \end{enumerate}
+
+\end{solution}
+
+\end{document}

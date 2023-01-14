@@ -1,0 +1,285 @@
+\documentclass[UTF8,a4paper,14pt]{ctexart}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+%for 字體
+%https://tug.org/FontCatalogue/
+% \usepackage[T1]{fontenc}
+% \usepackage{tgbonum}
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage[T1]{fontenc}
+%\usepackage{bm}#粗體
+%\usepackage{boondox-calo}
+\usepackage{textcomp}
+\usepackage{fancyhdr}%导入fancyhdr包
+\usepackage{ctex}%导入ctex包
+\usepackage{enumitem} %for在Latex使用條列式清單
+\usepackage{varwidth}
+\usepackage{soul} %for \ul
+\usepackage{comment}%\begin{comment}\end{comment}
+\usepackage{cancel}%\cancel{}
+%\usepackage{unicode-math}
+\usepackage{physics}% for derivative/partial derivative
+
+\usepackage[dvipsnames, svgnames, x_11names]{xcolor}
+
+\usepackage[low-sup]{subdepth}
+\usepackage{subdepth}
+
+\newcommand{\indep}{\perp \!\!\! \perp}
+
+\usepackage{amsthm}
+
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+
+% \DeclareMathOperator{\E}{\mathbb{E}}
+\newcommand{\E}{{\rm I\kern-.3em E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Corr}{\mathrm{Corr}}
+% \DeclareMathOperator{\Var}{\textbf{Var}}
+% \DeclareMathOperator{\Cov}{\textbf{Cov}}
+% \DeclareMathOperator{\Corr}{\textbf{Corr}}
+
+
+\DeclareMathSizes{10}{10}{7}{5}
+
+\usepackage[a4paper, margin=1.5in]{geometry}
+
+\usepackage{array, makecell} %
+
+
+%中英文設定
+%\usepackage{fontspec}
+% \setmainfont{Computer Modern Sans Serif}
+% \setmainfont{TeX Gyre Termes}
+% \usepackage{xeCJK} %引用中文字的指令集
+%\setCJKmainfont{PMingLiU}
+% \setCJKmainfont{DFKai-SB}
+% \setmainfont{Times New Roman}
+% \setCJKmonofont{DFKai-SB}
+\pagenumbering{arabic}%设置页码格式
+\pagestyle{fancy}
+\fancyhead{} % 初始化页眉
+\fancyhead[C]{TSA\quad HW 04\quad  R10A21126\quad  WANG YIFAN\quad   \today}
+%\fancyhead[LE]{\textsl{\rightmark}}
+%\fancyfoot{} % 初始化页脚
+%\fancyfoot[LO]{奇数页左页脚}
+%\fancyfoot[LE]{偶数页左页脚}
+%\fancyfoot[RO]{奇数页右页脚}
+%\fancyfoot[RE]{偶数页右页脚}
+
+% \title{{Econometrics HW 03}}
+% \author{R10A21126}
+% \date{\today}
+
+%\fancyhf{}
+\usepackage{lastpage}
+\cfoot{Page \thepage \hspace{1pt} of\, \pageref{LastPage}}
+
+\renewcommand{\headrulewidth}{0.1pt}%分隔线宽度4磅
+%\renewcommand{\footrulewidth}{4pt}
+
+\allowdisplaybreaks
+\usepackage[english]{babel}
+%\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+
+\usepackage[most]{tcolorbox}
+% \newtcbtheorem{Problem}{\bfseries Problem}{enhanced,arc= 1 mm,boxrule=0pt,frame hidden,
+%   colback = Pink!50!White,
+%   coltitle=black,
+%   top=0.15in,
+%   attach boxed title to top left=
+%   {xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+%   boxed title style={size=small,colback=LightPink!70!White}
+% }{}
+\definecolor{babyblue}{rgb}{0.54, 0.81, 0.94}
+
+\newtcolorbox[auto counter]{mybox}[1]{
+    enhanced,
+    arc= 1 mm,boxrule=1pt,
+    colframe=pink!90!white,
+    colback=white,
+    coltitle=black,
+    % colback=blue!5!white,
+    attach boxed title to top left=
+    {xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+    boxed title style={size=small,
+    % frame hidden,
+    colback=LightPink!10!White},
+    top=0.15in,
+    % fonttitle=\bfseries,
+    title= {#1},
+    subtitle style={boxrule=0.4pt,
+              colback=yellow!10!red!10!white},
+    breakable
+  }
+\newtcolorbox[auto counter]{Problem}[1]{
+    enhanced,drop shadow={blue!5!white},
+    colframe=babyblue!50!,
+    fonttitle=\bfseries,
+    title=Problem ~\thetcbcounter. #1,
+    %separator sign={.},
+    coltitle=black,
+    colback=blue!3,
+    top=0.15in,
+    breakable
+  }
+
+\newenvironment{solution}
+  {\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[Solution]}
+  {\end{proof}}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+%\theoremstyle{notation}
+\newtheorem*{notation}{\underline{Notation}}
+%\newtheorem*{convention}{\underline{Convention}}
+\newtheorem*{convention}{\underline{Convention}}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\newenvironment{amatrix}[2]{%% [2] for 2 parameters 
+  \left[\begin{array}
+    %{cc|cc}
+    %  {@{}*{#2}{c}|c*{#1}{c}}
+     {{}*{#1}{c}|c*{#2}{c}}
+}{%
+  \end{array}\right]
+}
+% For augmented matrix  
+%https://tex.stackexchange.com/questions/2233/whats-the-best-way-make-an-augmented-coefficient-matrix
+
+
+
+\usepackage{pgfplots}
+\pgfplotsset{width=10cm,compat=1.18}
+% \pgfplotsset{width=10cm,compat=0.9}
+\usepackage{csvsimple}
+\usepackage{enumitem}
+
+
+\begin{document}
+
+\begin{Problem}{}
+  Suppose the annual sales (in millions) of company A follow an AR(2) model:
+  \begin{equation}\
+    \begin{aligned}
+      y_t= 5+1.1y_{t-1}-0.5 y_{t-2} +a_t
+    \end{aligned}
+  \end{equation}
+where \(\sigma_a^2=2\).
+\begin{enumerate}[label=(\alph*)]
+  \item Show that the \(\psi_1\) in the random shock form is also 1.1. 
+  \item If the sales for 2005, 2006, and 2007 were 9, 11, and 10, respectively, forecast the sales for 2008 and 2009.
+  \item Calculate the 95\% confidence interval of the 2008 forecast in (b).
+  \item If we now know the real sales of 2008 is 12, update your forecast for 2009.
+\end{enumerate}
+
+\end{Problem}
+
+\begin{solution}\,\\
+(a)\\
+  \begin{equation}\
+    \begin{aligned}
+      y_t &= 5+1.1y_{t-1}-0.5 y_{t-2} + a_t\\
+      &=5+1.1(5+1.1y_{t-2}-0.5 y_{t-3} + a_{t-1})-0.5 y_{t-2} + a_t\\
+      &=5+5.5+1.21y_{t-2}-0.55y_{t-3}+1.1a_{t-1}-0.5 y_{t-2} + a_t\\
+      &\vdots
+    \end{aligned}
+  \end{equation}  
+  Put \(y_t\) in random shock form:
+  \begin{equation}\
+    \begin{aligned}
+      y_t = a_t+ \psi_1 a_{t-1} +\psi_2 a_{t-2}+\cdots
+    \end{aligned}
+  \end{equation}
+  If we then equate coefficients of \(a_t\), we get the recursive relationships
+  \begin{equation}\
+    \left.
+    \begin{aligned}
+      \psi_0 &=1\\
+      \psi_1-\phi_1\psi_0&=0\\
+      \psi_j-\phi_1\psi_{j-1}-\phi_2\psi_{j-2}&=0 \text{ for } j=2,3\ldots
+    \end{aligned}
+    \right\}
+  \end{equation}  
+  \begin{equation}
+    \begin{aligned}
+      \psi_1-(1.1)(1)&=0\\
+      \psi_1&=1.1
+    \end{aligned}
+  \end{equation}
+  (b)\\
+  \begin{equation}
+    \begin{aligned}
+      \hat{y}_{2007}(1)=\hat{y}_{2008}&= 5+1.1 y_{2007}-0.5 y_{2006}\\
+      &=5+1.1(10)-0.5(11)\\
+      &=10.5
+    \end{aligned}
+  \end{equation}
+  \begin{equation}
+    \begin{aligned}
+      \hat{y}_{2007}(2)=\hat{y}_{2009}&= 5+1.1 \hat{y}_{2008}-0.5 y_{2007}\\
+      &=5+1.1(10.5)-0.5(10)\\
+      &=11.55
+    \end{aligned}
+  \end{equation}
+  (c)\\
+  The 95\% confidence interval of \(\hat{y}_{2008}\) is
+  \begin{equation}
+    \begin{aligned}
+      \left(\hat{y}_{2007+1}-z_{0.05/2}\sqrt{\Var[e_{2007}(1)]},\hat{y}_{2007+1}+z_{0.05/2}\sqrt{\Var[e_{2007}(1)]}\right)
+    \end{aligned}
+  \end{equation}
+  Since we have \(z_{0.025}=1.96\), and
+  \begin{equation}
+    \begin{aligned}
+      \Var[e_{2007}(1)]&=\sigma_a^2\left\{1\right\}=2
+    \end{aligned}
+  \end{equation}
+  Therefore,
+  \begin{equation}
+    \begin{aligned}
+      &=\hat{y}_{2007+1}\pm z_{0.05/2}\sqrt{\Var[e_{2007}(1)]}\\
+      &=10.5\pm (1.96)(\sqrt{2})\\
+      &=10.5\pm 2.77
+    \end{aligned}
+  \end{equation}
+  Thus, the 95\% confidence interval of \(\hat{y}_{2008}\) is
+  \begin{equation}
+    \begin{aligned}
+      \left(7.73, 13.27\right)
+    \end{aligned}
+  \end{equation}
+  (d)\\
+  Given that the sales in 2008 turn out to be \$12 million, update the forecast for 2009.
+  With the updating rule:
+  \begin{equation}
+    \begin{aligned}
+      \hat{y}_{T+1}(l)=\hat{y}_{T}(l+1)+\psi_1 a_{T+1}
+    \end{aligned}
+  \end{equation}
+  where \(a_{T+1}\) is the new residual as the time rolls to \(T+1\), and can be estimated as \[\hat{a}_{T+1} = y_{T+1}-\hat{y}_{T}(1)\]
+  Thus,
+  \begin{equation}
+    \begin{aligned}
+      \hat{y}_{2007+1}(1)&=\hat{y}_{2007}(1+1)+\psi_1 a_{2007+1}\\
+      &=11.55+1.1(12-10.5)\\
+      &=13.2
+    \end{aligned}
+  \end{equation}
+
+
+\end{solution}
+
+\end{document}

@@ -1,0 +1,432 @@
+\documentclass[UTF8,a4paper,14pt]{ctexart}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+%\usepackage{bm}#粗體
+%\usepackage{boondox-calo}
+\usepackage{textcomp}
+\usepackage{fancyhdr}%导入fancyhdr包
+\usepackage{ctex}%导入ctex包
+\usepackage{enumitem} %for在Latex使用條列式清單
+\usepackage{varwidth}
+\usepackage{soul} %for \ul
+\usepackage{comment}%\begin{comment}\end{comment}
+\usepackage{cancel}%\cancel{}
+%\usepackage{unicode-math}
+
+\usepackage[dvipsnames, svgnames, x_11names]{xcolor}
+
+\usepackage[low-sup]{subdepth}
+\usepackage{subdepth}
+
+\newcommand{\indep}{\perp \!\!\! \perp}
+
+\usepackage{amsthm}
+
+% \DeclareMathOperator{\E}{\mathbb{E}}
+\newcommand{\E}{{\rm I\kern-.3em E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Corr}{\mathrm{Corr}}
+% \DeclareMathOperator{\Var}{\textbf{Var}}
+% \DeclareMathOperator{\Cov}{\textbf{Cov}}
+% \DeclareMathOperator{\Corr}{\textbf{Corr}}
+
+
+\DeclareMathSizes{10}{10}{7}{5}
+
+\usepackage[a4paper, margin=1.5in]{geometry}
+
+\usepackage{array, makecell} %
+
+
+%中英文設定
+%\usepackage{fontspec}
+\setmainfont{TeX Gyre Termes}
+\usepackage{xeCJK} %引用中文字的指令集
+%\setCJKmainfont{PMingLiU}
+\setCJKmainfont{DFKai-SB}
+% \setmainfont{Times New Roman}
+\setCJKmonofont{DFKai-SB}
+\pagenumbering{arabic}%设置页码格式
+\pagestyle{fancy}
+\fancyhead{} % 初始化页眉
+\fancyhead[C]{TSA\quad HW 03\quad  R10A21126\quad  WANG YIFAN\quad   \today}
+%\fancyhead[LE]{\textsl{\rightmark}}
+%\fancyfoot{} % 初始化页脚
+%\fancyfoot[LO]{奇数页左页脚}
+%\fancyfoot[LE]{偶数页左页脚}
+%\fancyfoot[RO]{奇数页右页脚}
+%\fancyfoot[RE]{偶数页右页脚}
+
+\title{{Econometrics HW 03}}
+\author{R10A21126}
+\date{\today}
+
+%\fancyhf{}
+\usepackage{lastpage}
+\cfoot{Page \thepage \hspace{1pt} of\, \pageref{LastPage}}
+
+\renewcommand{\headrulewidth}{0.1pt}%分隔线宽度4磅
+%\renewcommand{\footrulewidth}{4pt}
+
+\allowdisplaybreaks
+\usepackage[english]{babel}
+%\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+
+\usepackage[most]{tcolorbox}
+% \newtcbtheorem{Problem}{\bfseries Problem}{enhanced,arc= 1 mm,boxrule=0pt,frame hidden,
+%   colback = Pink!50!White,
+%   coltitle=black,
+%   top=0.15in,
+%   attach boxed title to top left=
+%   {xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+%   boxed title style={size=small,colback=LightPink!70!White}
+% }{}
+\definecolor{babyblue}{rgb}{0.54, 0.81, 0.94}
+
+\newtcolorbox[auto counter]{mybox}[1]{
+    enhanced,
+    arc= 1 mm,boxrule=1pt,
+    colframe=pink!90!white,
+    colback=white,
+    coltitle=black,
+    % colback=blue!5!white,
+    attach boxed title to top left=
+    {xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+    boxed title style={size=small,
+    % frame hidden,
+    colback=LightPink!10!White},
+    top=0.15in,
+    % fonttitle=\bfseries,
+    title= {#1},
+    breakable
+  }
+\newtcolorbox[auto counter]{Problem}[1]{
+    enhanced,drop shadow={blue!5!white},
+    colframe=babyblue!50!,
+    fonttitle=\bfseries,
+    title=Problem ~\thetcbcounter. #1,
+    %separator sign={.},
+    coltitle=black,
+    colback=blue!3,
+    top=0.15in,
+    breakable
+  }
+
+\newenvironment{solution}
+  {\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[Solution]}
+  {\end{proof}}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+%\theoremstyle{notation}
+\newtheorem*{notation}{\underline{Notation}}
+%\newtheorem*{convention}{\underline{Convention}}
+\newtheorem*{convention}{\underline{Convention}}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\newenvironment{amatrix}[2]{%% [2] for 2 parameters 
+  \left[\begin{array}
+    %{cc|cc}
+    %  {@{}*{#2}{c}|c*{#1}{c}}
+     {{}*{#1}{c}|c*{#2}{c}}
+}{%
+  \end{array}\right]
+}
+% For augmented matrix  
+%https://tex.stackexchange.com/questions/2233/whats-the-best-way-make-an-augmented-coefficient-matrix
+
+
+
+\begin{document}
+
+\begin{Problem}{}
+    $y_t$ is a is a stationary process with the autocovariance function $\gamma_k$. 
+    \[\bar{y} := \frac{1}{n}\sum_{t=1}^n y_t.\] 
+    Show that
+    \[\Var[\bar{y}] = \frac{\gamma_0}{n}+\frac{2}{n}\sum_{k = 1}^{n-1}\left(1-\frac{k}{n}\right)\gamma_k = \frac{1}{n}\sum_{k=-n+1}^{n-1}\left(1-\frac{\left\lvert k \right\rvert }{n}\right)\gamma_k .\]
+    \end{Problem}
+\begin{solution}
+    \begin{align*}
+        \Var[\bar{y}] &= \Cov[\bar{y},\bar{y}]\\
+        &=\frac{1}{n^2}\sum_{i = 1}^{n}\sum_{j = 1}^{n}\Cov[y_i,y_j]\\
+        &=\frac{1}{n^2}\sum_{i = 1}^{n}\sum_{j = 1}^{n}\gamma_{\left\lvert i-j \right\rvert }
+    \end{align*}
+    \begin{center}
+        $\begin{array}{c @{\hspace{2\tabcolsep}}c|*{6}{c}}
+            & &i\\
+           &\textcolor{blue}{\gamma_{\left\lvert i-j \right\rvert}} &1&2&3&\cdots&n
+          \\[1ex]
+          \hline
+          j&1 & \gamma_0 & \gamma_1 & \gamma_2 & \cdots & \gamma_{n-1} \\[6pt]
+           &2 & \gamma_1 & \gamma_0 & \gamma_1 & \cdots & \gamma_{n-2} \\[6pt]
+           &3 & \gamma_2 & \gamma_1 & \gamma_0 & \cdots & \gamma_{n-3}  \\[6pt]
+      &\vdots & \vdots   & \vdots   & \vdots   & \ddots & \vdots \\[6pt]
+           &n & \gamma_{n-1} & \gamma_{n-2}  & \gamma_{n-3} & \cdots & \gamma_0
+          \end{array}$
+    \end{center}
+    \begin{align*}
+        \Var[\bar{y}] &= \frac{1}{n^2}\,\Bigl[n\gamma_0+2(n-1)\gamma_{1}+2(n-2)\gamma_2+\cdots+2(n-(n-1))\gamma_{n-1}\Bigr]\\
+        &=\frac{1}{n^2}\left[n\gamma_0+2\sum_{k=1}^{n-1}(n-k)\gamma_k\right]\\
+        &=\frac{1}{n}\left[\gamma_0+2\sum_{k=1}^{n-1}\left(1-\frac{k}{n}\right)\gamma_k\right] 
+        \quad\textcolor{red}{{=}}\,\frac{\gamma_0}{n}+\frac{2}{n}\sum_{k=1}^{n-1}\left(1-\frac{k}{n}\right)\gamma_k\\
+        &=\frac{1}{n}\left[\sum_{k=-(n-1)}^{-1}\left(1-\frac{|k|}{n}\right)\gamma_k+\left(1-\frac{|0|}{n}\right)\gamma_0+\sum_{k=1}^{n-1}\left(1-\frac{|k|}{n}\right)\gamma_k\right]\\
+        &\,\,\textcolor{red}{{=}}\,\,\frac{1}{n}\sum_{k=-n+1}^{n-1}\left(1-\frac{|k|}{n}\right)\gamma_k
+    \end{align*}
+    \end{solution} 
+
+\begin{Problem}{}
+    Assume $x_t$ is a stationary process and define $y_t = \begin{cases}
+        x_t &\text{for odd $t$}\\
+        x_t +3 &\text{for even $t$}
+    \end{cases}$\\[6pt]
+(a) Show that $\Cov[y_t,y_{t-k}]$ is independent of $t$ for all lags $k$.\\
+(b) Is $y_t$ stationary?
+\end{Problem} 
+
+\begin{solution}\,\\
+    (a)\\
+    For stationary process $x_t$, let \(\gamma_k = \Cov[x_t,x_{t-k}]\)\\
+    \begin{align*}
+        \Cov[y_t,y_{t-k}] = \left\{\begin{array}{lc}
+            \Cov[x_t,x_{t-k}]  &\text{$t$ odd, $k$ even}\\
+            \Cov[x_t,x_{t-k}+3] &\text{$t$ odd, $k$ odd}\\
+            \Cov[x_t+3,x_{t-k}+3]  &\text{$t$ even, $k$ even}\\
+            \Cov[x_t+3,x_{t-k}]  &\text{$t$ even, $k$ odd}\\
+        \end{array}\right\} = \gamma_k
+    \end{align*}
+    % \begin{align*}
+    %     \Cov[y_t,y_{t-k}] = \left.\begin{cases}
+    %         \Cov[x_t,x_{t-k}]  &\text{$t$ odd, $k$ even}\\
+    %         \Cov[x_t,x_{t-k}+3] &\text{$t$ odd, $k$ odd}\\
+    %         \Cov[x_t+3,x_{t-k}+3]  &\text{$t$ even, $k$ even}\\
+    %         \Cov[x_t+3,x_{t-k}]  &\text{$t$ even, $k$ odd}\\
+    %     \end{cases}\right\} = \gamma_k
+    % \end{align*}
+    Therefore, $\Cov[y_t,y_{t-k}]$ is independent of $t$ for all lags $k$.
+
+    \begin{mybox}{Stationarity}
+        \begin{itemize}
+            \item Strict Stationarity
+                \begin{itemize}
+                    \item Too strong for most applications
+                    \item The whole
+                    probability structure must depend only on time differences
+                    \item Second-order stationarity and an assumption of normality are sufficient to produce strict stationarity.
+                \end{itemize}
+            \item Second-order Stationarity (Weak Stationarity)
+                \begin{itemize}
+                    \item Imposes conditions only on the first two moments of the series
+                \item The mean $\E[x_t] = \mu$ is a fixed constant for all $t$
+                \item The autocovariances $\Cov[x_t,x_{t-k}] = \gamma_k$ depend only on the time difference or time lag $k$ for all $t$.
+            \end{itemize}
+        \end{itemize}
+    \end{mybox}
+
+    (b)\\
+    \begin{align*}
+        \E[y_t] = \begin{cases}
+            \E[x_t]&\text{$t$ odd}\\
+            \E[x_t]+3&\text{$t$ even}\\
+        \end{cases}
+    \end{align*}
+    The mean of the process $\{y_t\}$ is not a constant. Therefore, the process $\{y_t\}$ is nonstationary.\\
+\end{solution}
+\pagebreak
+\begin{Problem}{}
+    Let $\{y_t\}$ be a stationary process with an autocovariance function $\gamma_k$.\\[6pt]
+(a) Show that $z_t = \nabla y_t = y_t - y_{t-1}$ is stationary by finding the mean and autocovariance function for $z_t$.\\
+(b) Show that $w_t = \nabla_2 y_t = z_t - z_{t-1} = y_t - 2y_{t-1} + y_{t-2}$ is stationary.
+\end{Problem}
+\begin{solution}\,\\
+    (a)\\
+    Since $\{y_t\}$ is a stationary process, it has constant mean $\mu$ over time and autocovariance function $\gamma_k$ which does not depend on time $t$. We have $z_t = \nabla y_t =
+y_t - y_{t-1}$
+\begin{align*}
+    \E[z_t] &= \E[y_t - y_{t-1}]\\
+     &= \E[y_t] - \E[y_{t-1}]\\ 
+     &= \mu - \mu = 0
+\end{align*}
+The mean function of $\{z_t\}$ is constant over time $t$. 
+\begin{align*}
+    \Cov[z_t, z_{t-k}] &= \Cov[y_t - y_{t-1}, y_{t-k }- y_{t-k-1}]\\
+    &= \Cov[y_t, y_{t-k}] + \Cov[y_t, -y_{t-k-1}] + \Cov[-y_{t-1}, y_{t-k}] + \Cov[-y_{t-1}, -y_{t-k-1}]\\
+    &= \Cov[y_t, y_{t-k}] - \Cov[y_t, y_{t-k-1}] - \Cov[y_{t-1}, y_{t-k}] + \Cov[y_{t-1}, y_{t-k-1}]\\
+    &= \gamma_k - \gamma_{k+1} - \gamma_{k-1} + \gamma_k\\    
+    &= -\gamma_{k+1} + 2\gamma_k - \gamma_{k-1}\quad := \gamma_k' 
+\end{align*}
+The autocovariance function of $\{z_t\}$ only depends on time lag $k$. So we conclude that $\{z_t\}$ is stationary.\\
+\\
+(b)
+\begin{align*}
+    \E[w_t] &= \E[z_t - z_{t-1}]\\
+     &= \E[z_t] - \E[z_{t-1}]\\ 
+     &= 0 - 0 = 0
+\end{align*}
+\begin{align*}
+    \Cov[w_t, w_{t-k}] &= \Cov[z_t - z_{t-1}, z_{t-k }- z_{t-k-1}]\\
+    &= \Cov[z_t, z_{t-k}] + \Cov[z_t, -z_{t-k-1}] + \Cov[-z_{t-1}, z_{t-k}] + \Cov[-z_{t-1}, -z_{t-k-1}]\\
+    &= \Cov[z_t, z_{t-k}] - \Cov[z_t, z_{t-k-1}] - \Cov[z_{t-1}, z_{t-k}] + \Cov[z_{t-1}, z_{t-k-1}]\\
+    &= \gamma_k' - \gamma_{k+1}' - \gamma_{k-1}' + \gamma_k'\\    
+    &= -\gamma_{k+1}' + 2\gamma_k' - \gamma_{k-1}' 
+\end{align*}
+The mean function of $\{w_t\}$ is constant over time $t$. The autocovariance function of $\{w_t\}$ only depends on time lag $k$. So we conclude that $\{w_t\}$ is stationary.\\
+\end{solution}
+
+
+\begin{Problem}{}
+    Let $x_t$ be stationary with $\E[x_t] = 0$, $\Var[x_t] = 1$, autocorrelation function $\rho_k$ . Define that $\mu_t$ is a nonconstant function and $\sigma_t$ is a positively nonconstant \textbf{function} (that is to say: $\mu_t$ and $\sigma_t$ are both deterministic and in function of $t$). Now we observe a time series formulated as 
+\[y_t = \mu_t + \sigma_t x_t.\]
+
+(a) Find the mean and autocovariance function of $y_t$.\\
+(b) Show that the autocorrelation of $y_t$ depends only on the lag $k$. Is $y_t$ stationary?\\
+(c) Let $\mu_t = \mu_0$ be a constant value. Justify that $y_t$ is still nonstationary.
+    
+\end{Problem}
+
+\begin{solution}
+    \,\\
+    (a)
+    \begin{align*}
+        \E[y_t] &= \E[\mu_t + \sigma_t x_t]\\
+        &=\E[\mu_t]+\E[\sigma_t x_t]\\
+        &=\mu_t+0=\mu_t
+    \end{align*}
+    \begin{align*}
+        \Cov[y_t,y_{t-k}] = &\Cov[\mu_t + \sigma_t x_t,\mu_{t-k} + \sigma_{t-k} x_{t-k}]\\
+        &=\Cov[ \sigma_t x_t, \sigma_{t-k} x_{t-k}]\\
+        &=\sigma_t \sigma_{t-k}\Cov[x_t, x_{t-k}]\\
+        &=\sigma_t \sigma_{t-k}\Corr[x_t, x_{t-k}]\sqrt{\Var[x_t]\Var[x_{t-k}]}\\
+        &=\sigma_t \sigma_{t-k}\Corr[x_t, x_{t-k}]{\Var[x_t]}\\
+        &=\sigma_t \sigma_{t-k}\rho_k
+    \end{align*}
+    (b)
+    \begin{align*}
+        \Var[y_x] &= \sigma_t^2\underset{1}{\underbrace{\rho_0}} = \sigma_t^2 
+    \end{align*}
+    \begin{align*}
+        \Corr[y_t,y_{t-k}] &= \frac{\Cov[y_t,y_{t-k}]}{\sqrt{\Var[y_t]\Var[y_{t-k}]}}\\
+        &=\frac{\sigma_t \sigma_{t-k}\rho_k}{\sqrt{\sigma_t ^2\sigma_{t-k}^2}}\\
+        &=\frac{\sigma_t \sigma_{t-k}\rho_k}{\sigma_t \sigma_{t-k}}
+        =\rho_k
+    \end{align*}
+    The autocorrelation of $y_t$ depends only on the lag $k$.\\ $y_t$ is not stationary because the mean function $\mu_t$ is not a constant over time t.\\
+
+    \pagebreak
+    \noindent
+    (c)\\
+    Let $\mu_t = \mu_0$ be a constant value. $y_t$ is still nonstationary because the autocovariance function depend on time t.\\
+
+\end{solution}
+
+\pagebreak
+\begin{Problem}{}
+    Let $x_t$ be the series of the "expected" measurements during the production process. Because the measuring tool itself won't be perfect, we observe \(y_t = x_t + e_t\), assuming $x_t$ and $e_t$ are independent. In general, we call $x_t$ the signal and $e_t$ the measurement (white) noise. If $x_t$ is stationary with the autocorrelation function $\rho_k$, show that $y_t$ is also a stationary process with 
+\[\Corr[y_t, y_{t-k}] =\frac{\rho_k}{1 + \frac{\sigma_e^2}{\sigma_x^2}},\,\quad \text{for } k \geq 1.\]
+\(\frac{\sigma_e^2}{\sigma_x^2}\) is usually referred to as the \textbf{signal-to-noise ratio}, or \textbf{SNR} for short.
+The larger the SNR, the closer the autocorrelation function of the observed series $y_t$ is to the autocorrelation function of the desired signal $x_t$.
+    
+\end{Problem}
+\begin{mybox}{White Noise Process}
+    The most fundamental example of a stationary process is a sequence of \textbf{independent and identically distributed} random variables, denoted as $\alpha_1, \ldots , \alpha_t, \ldots,$ which we also assume to have \textbf{mean zero} and variance $\sigma_\alpha^2$. This process is strictly stationary and is referred to as a \textbf{white noise process}. Because independence implies that the $\alpha_t$ are uncorrelated, its autocovariance function is simply
+    \[\gamma_k = \E[x_t,x_{t-k}] = \begin{cases}
+        \sigma_\alpha^2 & k = 0\\
+        0               & k \neq0
+    \end{cases}\]       
+\end{mybox}
+
+\begin{solution}
+    \begin{align*}
+        \E[y_t] &=\E[x_t + e_t] \\
+        &=\E[x_t]+\E[e_t]\\
+        &= \mu \quad\text{is a fixed constant}
+    \end{align*}
+    \begin{align*}
+        \Cov[y_t,y_{t-k}] &= \Cov[x_t + e_t,x_{t-k} + e_{t-k}] \\
+        &=\Cov[x_t,x_{t-k}]+\Cov[x_t , e_{t-k}]+\Cov[e_t,x_{t-k}]+\Cov[e_t, e_{t-k}]\\
+        &=\Corr[x_t,x_{t-k}]\sigma_x^2+\Cov[e_t, e_{t-k}]\quad \text{$x_t$ and $e_t$ are independent}\\
+        &=\begin{cases}
+            \rho_0\sigma_x^2+\sigma_e^2  &k = 0\\
+            \rho_k\sigma_x^2+0 &k\geq 1
+        \end{cases}\\
+        &=\begin{cases}
+            \sigma_x^2+\sigma_e^2 = \Var[y_t] &k = 0\\
+            \rho_k\sigma_x^2 &k\geq 1
+        \end{cases}
+    \end{align*}
+    $y_t$ is a stationary process with constant mean and autocovariances depending only on the time difference
+    or time lag $k$ for all $t$.
+    \pagebreak
+    \begin{align*}
+        \Corr[y_t,y_{t-k}] &= \frac{\Cov[y_t,y_{t-k}]}{\sqrt{\Var[y_t]\Var[y_{t-k}]}}\\
+        &=\frac{\rho_k\sigma_x^2}{\Var[y_t]}\\
+        % &=\frac{\rho_k\sigma_x^2}{\Var[y_t]}\\
+        &=\frac{\rho_k\sigma_x^2}{\sigma_x^2+\sigma_e^2}\\
+        &=\frac{\rho_k}{1 + \frac{\sigma_e^2}{\sigma_x^2}}\,\quad \text{for } k \geq 1.
+    \end{align*}
+    
+\end{solution}
+
+\pagebreak
+\begin{Problem}{Cyclical Behavior and Periodicity}
+    \textbf{Mixtures of periodic series with
+    multiple frequencies and amplitudes:}\\
+    Suppose 
+    \[y_t = \alpha_0 + \sum_{i=1}^q \left[\alpha_i \cos(2\pi f_i t) + \beta_i \sin(2\pi f_i t)\right],\]
+where 
+$\alpha_0, f_1, f_2, \ldots, f_q$ are constants and $\alpha_1, \alpha_2, \ldots, \alpha_q, \beta_1, \beta_2,\ldots, \beta_q$ are independent random variables with zero means and variances 
+\[\Var[\alpha_i] = \Var[\beta_i] = \sigma_i^2.\]
+Show that $y_t$ is stationary and find its autocovariance function.\\
+(Hint: show \(\Cov[y_t, y_s]\) depends only on $t - s$.
+\end{Problem}
+
+\begin{solution}
+    \begin{align*}
+        \E[y_t] &= \E\left[\alpha_0 + \sum_{i=1}^q \left[\alpha_i \cos(2\pi f_i t) + \beta_i \sin(2\pi f_i t)\right]\right]\\
+        &=\E[\alpha_0]+\E\left[\sum_{i=1}^q \left[\alpha_i \cos(2\pi f_i t) + \beta_i \sin(2\pi f_i t)\right]\right]\\
+        % &=\E[\alpha_0]+\sum_{i=1}^q\left\{\cos(2\pi f_i t)\E[\alpha_i]+\sin(2\pi f_i t)\E[\beta_i]\right\}\\
+        &=\E[\alpha_0]+\sum_{i=1}^q\left\{\cos(2\pi f_i t)\underset{0}{\underbrace{\E[\alpha_i]}}+\sin(2\pi f_i t)\underset{0}{\underbrace{\E[\beta_i]}}\right\}\\
+        &=\E[\alpha_0]\quad\text{constant}
+    \end{align*}
+    Let 
+    \begin{align*}
+        s &= t-k\\
+        u_i(t) &= \alpha_i \cos(2\pi f_i t) = \alpha_i c_{it}\\
+        v_i(t) &= \beta_i \sin(2\pi f_i t) = \beta_i s_{it}
+    \end{align*}
+    \begin{align*}
+        \Cov[y_t,y_s] &=\Cov\left[\left\{\alpha_0 + \sum_{i=1}^q \left[u_i(t) + v_i(t)\right]\right\},\left\{\alpha_0 + \sum_{i=1}^q \left[u_i(s) + v_i(s)\right]\right\}\right]\\
+        &=\Cov\left[\left\{ \sum_{i=1}^q \left[u_i(t) + v_i(t)\right]\right\},\left\{\sum_{i=1}^q \left[u_i(s) + v_i(s)\right]\right\}\right]\\
+        &=\sum_{i=1}^q \sum_{j=1}^q \left\{\Cov[u_i(t),u_j(s)]+\Cov[u_i(t),v_j(s)]+\Cov[v_i(t),u_j(s)]+\Cov[v_i(t),v_j(s)]\right\}\\
+        &=\sum_{i=1}^q \sum_{j=1}^q \left\{\Cov[\alpha_i c_{it},\alpha_j c_{js}]+\Cov[\alpha_i c_{it},\beta_j s_{js}]+\Cov[\beta_i s_{it},\alpha_j c_{js}]+\Cov[\beta_i s_{it},\beta_j s_{js}]\right\}\\
+        % &=\sum_{i=1}^q \sum_{j=1}^q \left\{\Cov[\alpha_i c_{it},\alpha_j c_{js}]+0+0+\Cov[\beta_i s_{it},\beta_j s_{js}]\right\}\\
+        &=\sum_{i=1}^q  \left\{ c_{it}c_{is}\Cov[\alpha_i,\alpha_i ]+s_{it}s_{is}\Cov[\beta_i ,\beta_i ]\right\}\quad\alpha_1, \alpha_2, \ldots, \alpha_q, \beta_1, \beta_2,\ldots, \beta_q \text{ are independent r.v.}\\
+        &=\sum_{i=1}^q  \left\{ c_{it}c_{is}\Var[\alpha_i]+s_{it}s_{is}\Var[\beta_i]\right\}\\
+        &=\sum_{i=1}^q  \left\{ c_{it}c_{is}+s_{it}s_{is}\right\}\sigma_i^2 \\
+        &=\sum_{i=1}^q  \left\{  \cos(2\pi f_i t) \cos(2\pi f_i s)+ \sin(2\pi f_i t) \sin(2\pi f_i s)\right\}\sigma_i^2 \\
+        &=\sum_{i=1}^q  \left\{  \cos(2\pi f_i t-2\pi f_i s) \right\}\sigma_i^2 \\
+        &=\sum_{i=1}^q  \left\{  \cos(2\pi f_i k) \right\}\sigma_i^2 
+    \end{align*}
+    \(\gamma_k = \Cov[y_t, y_{t-k}]=\Cov[y_t, y_s]\) depends only on $k = t - s$.\\
+    $y_t$ is a stationary process with constant mean and autocovariances depending only on the time difference or time lag $k$ for all $t$.
+
+\end{solution}
+\begin{mybox}{Trigonometric Identities (Sum \& Difference Identities)}
+    \begin{align*}
+        \cos(\alpha\pm \beta) &= \cos(\alpha)\cos(\beta)\mp \sin(\alpha)\sin(\beta)\\
+        \sin(\alpha\pm \beta) &= \sin(\alpha)\cos(\beta)\pm \cos(\alpha)\sin(\beta)\\
+        \tan(\alpha\pm \beta) &=\frac{\tan(\alpha)\pm\tan(\beta)}{1\mp\tan(\alpha)\tan(\beta)}
+    \end{align*}
+
+\end{mybox}
+
+\end{document}

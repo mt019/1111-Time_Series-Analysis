@@ -1,0 +1,352 @@
+\documentclass[UTF8,a4paper,14pt]{ctexart}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+%for 字體
+%https://tug.org/FontCatalogue/
+% \usepackage[T1]{fontenc}
+% \usepackage{tgbonum}
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage[T1]{fontenc}
+%\usepackage{bm}#粗體
+%\usepackage{boondox-calo}
+\usepackage{textcomp}
+\usepackage{fancyhdr}%导入fancyhdr包
+\usepackage{ctex}%导入ctex包
+\usepackage{enumitem} %for在Latex使用條列式清單
+\usepackage{varwidth}
+\usepackage{soul} %for \ul
+\usepackage{comment}%\begin{comment}\end{comment}
+\usepackage{cancel}%\cancel{}
+%\usepackage{unicode-math}
+\usepackage{physics}% for derivative/partial derivative
+
+\usepackage[dvipsnames, svgnames, x_11names]{xcolor}
+
+\usepackage[low-sup]{subdepth}
+\usepackage{subdepth}
+
+\newcommand{\indep}{\perp \!\!\! \perp}
+
+\usepackage{amsthm}
+
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+
+% \DeclareMathOperator{\E}{\mathbb{E}}
+\newcommand{\E}{{\rm I\kern-.3em E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Corr}{\mathrm{Corr}}
+% \DeclareMathOperator{\Var}{\textbf{Var}}
+% \DeclareMathOperator{\Cov}{\textbf{Cov}}
+% \DeclareMathOperator{\Corr}{\textbf{Corr}}
+
+
+\DeclareMathSizes{10}{10}{7}{5}
+
+\usepackage[a4paper, margin=1.5in]{geometry}
+
+\usepackage{array, makecell} %
+
+
+%中英文設定
+%\usepackage{fontspec}
+% \setmainfont{Computer Modern Sans Serif}
+% \setmainfont{TeX Gyre Termes}
+% \usepackage{xeCJK} %引用中文字的指令集
+%\setCJKmainfont{PMingLiU}
+% \setCJKmainfont{DFKai-SB}
+% \setmainfont{Times New Roman}
+% \setCJKmonofont{DFKai-SB}
+\pagenumbering{arabic}%设置页码格式
+\pagestyle{fancy}
+\fancyhead{} % 初始化页眉
+\fancyhead[C]{TSA\quad HW 04\quad  R10A21126\quad  WANG YIFAN\quad   \today}
+%\fancyhead[LE]{\textsl{\rightmark}}
+%\fancyfoot{} % 初始化页脚
+%\fancyfoot[LO]{奇数页左页脚}
+%\fancyfoot[LE]{偶数页左页脚}
+%\fancyfoot[RO]{奇数页右页脚}
+%\fancyfoot[RE]{偶数页右页脚}
+
+% \title{{Econometrics HW 03}}
+% \author{R10A21126}
+% \date{\today}
+
+%\fancyhf{}
+\usepackage{lastpage}
+\cfoot{Page \thepage \hspace{1pt} of\, \pageref{LastPage}}
+
+\renewcommand{\headrulewidth}{0.1pt}%分隔线宽度4磅
+%\renewcommand{\footrulewidth}{4pt}
+
+\allowdisplaybreaks
+\usepackage[english]{babel}
+%\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+
+\usepackage[most]{tcolorbox}
+% \newtcbtheorem{Problem}{\bfseries Problem}{enhanced,arc= 1 mm,boxrule=0pt,frame hidden,
+%   colback = Pink!50!White,
+%   coltitle=black,
+%   top=0.15in,
+%   attach boxed title to top left=
+%   {xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+%   boxed title style={size=small,colback=LightPink!70!White}
+% }{}
+\definecolor{babyblue}{rgb}{0.54, 0.81, 0.94}
+
+\newtcolorbox[auto counter]{mybox}[1]{
+    enhanced,
+    arc= 1 mm,boxrule=1pt,
+    colframe=pink!90!white,
+    colback=white,
+    coltitle=black,
+    % colback=blue!5!white,
+    attach boxed title to top left=
+    {xshift=1.5em,yshift=-\tcboxedtitleheight/2},
+    boxed title style={size=small,
+    % frame hidden,
+    colback=LightPink!10!White},
+    top=0.15in,
+    % fonttitle=\bfseries,
+    title= {#1},
+    subtitle style={boxrule=0.4pt,
+              colback=yellow!10!red!10!white},
+    breakable
+  }
+\newtcolorbox[auto counter]{Problem}[1]{
+    enhanced,drop shadow={blue!5!white},
+    colframe=babyblue!50!,
+    fonttitle=\bfseries,
+    title=Problem ~\thetcbcounter. #1,
+    %separator sign={.},
+    coltitle=black,
+    colback=blue!3,
+    top=0.15in,
+    breakable
+  }
+
+\newenvironment{solution}
+  {\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[Solution]}
+  {\end{proof}}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+%\theoremstyle{notation}
+\newtheorem*{notation}{\underline{Notation}}
+%\newtheorem*{convention}{\underline{Convention}}
+\newtheorem*{convention}{\underline{Convention}}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\newenvironment{amatrix}[2]{%% [2] for 2 parameters 
+  \left[\begin{array}
+    %{cc|cc}
+    %  {@{}*{#2}{c}|c*{#1}{c}}
+     {{}*{#1}{c}|c*{#2}{c}}
+}{%
+  \end{array}\right]
+}
+% For augmented matrix  
+%https://tex.stackexchange.com/questions/2233/whats-the-best-way-make-an-augmented-coefficient-matrix
+
+
+
+\usepackage{pgfplots}
+\pgfplotsset{width=10cm,compat=1.18}
+% \pgfplotsset{width=10cm,compat=0.9}
+\usepackage{csvsimple}
+\usepackage{enumitem}
+
+
+\begin{document}
+
+\begin{Problem}{}
+  Given the model \(y_t=a+bt+c_t+x_t\), where \(a\), \(b\) are constants, \(c_t\)
+  is deterministic and periodic with 
+  period \(s\) and \(x_t\) is a SARIMA\((p,0,q)\times(P,1,Q)_s\). What is the model for \(w_t=y_t-y_{t-s}\)?
+  
+\end{Problem}
+
+\begin{solution}\,\\
+  For \(x_t\):
+  \begin{equation}\
+    \begin{aligned}
+      \phi_p(B) \Phi_P(B^s) \nabla_s x_{t} = c + \theta_q(B)\Theta_Q(B^s)a_t
+    \end{aligned}
+  \end{equation}
+
+
+  \begin{equation}\
+    \begin{aligned}
+      w_t &= y_t - y_{t-s}\\
+      &= (a + bt + c_t + x_t)-(a + b(t-s) + c_{t-s} + x_{t-s})\\
+      &= bs + c_t - c_{t-s} + x_{t} - x_{t-s}\\
+      &= bs + x_{t} - x_{t-s}\\
+      &= bs + \nabla_s x_{t} 
+    \end{aligned}
+  \end{equation}
+  Therefore \({w_t}\) is ARMA\((p,q)\times(P,Q)_s\) with constant term of \(bs\).
+\end{solution}
+
+\begin{Problem}{}
+  Identify the following as certain multiplicative SARIMA models:
+  \begin{enumerate}[label=(\alph*)]
+    \item \(y_t=0.5y_{t-1}+y_{t-4}-0.5y_{t-5}+a_t-0.3a_{t-1}\)
+    \item \(y_t=y_{t-1}+y_{t-12}-y_{t-13}+a_t-0.5a_{t-1}-0.5a_{t-12}+0.25a_{t-13}\)
+  \end{enumerate}
+\end{Problem}
+
+\begin{solution}\,\\
+  (a)
+  \begin{equation}\
+    \begin{aligned}
+      y_t - y_{t-4} &= 0.5(y_{t-1}-y_{t-5}) + a_t - 0.3a_{t-1}\\
+      (y_t - y_{t-4}) - 0.5(y_{t-1}-y_{t-5}) &=  a_t - 0.3a_{t-1}\\
+      (\nabla_4 y_t ) - 0.5(\nabla_4 y_{t-1}) &=  a_t - 0.3a_{t-1}\\
+      (1-0.5B)\nabla_4 y_t &= (1-0.3)a_t
+    \end{aligned}
+  \end{equation}
+  We can see that \(y_t\) can be modeled as ARIMA\((1,0,1)\times(0,1,0)_4\), with \(\phi_1 = 0.5\) and \(\theta_1 = 0.3\).\\
+  \\
+  (b)
+  \begin{equation}\
+    \begin{aligned}
+      y_t &= y_{t-1}+y_{t-12}-y_{t-13}+a_t-0.5a_{t-1}-0.5a_{t-12}+0.25a_{t-13}\\
+      \nabla y_t &= \nabla  y_{t-12} + a_t-0.5a_{t-1}-0.5a_{t-12}+0.25a_{t-13}\\
+      \nabla y_t - \nabla  y_{t-12} &= a_t-0.5a_{t-1}-0.5a_{t-12}+0.25a_{t-13}\\
+      \nabla\nabla_{12} y_t &=  (1-0.5B-0.5B^{12}+0.25B^{13})a_t\\
+      \nabla\nabla_{12} y_t &=  (1-0.5B)(1-0.5B^{12})a_t\\
+    \end{aligned}
+  \end{equation}
+  We can see that \(y_t\) is an ARIMA\((0,1,1)\times(0,1,1)_{12}\), with \(\Theta_1 = 0.5\), and \(\theta_1 = 0.5\).
+\end{solution}
+
+
+\begin{Problem}{}
+  If the characteristic polynomial of an AR time series model is
+  \[(1-1.6B+0.7B^2)(1-0.8B^{12})\]
+\begin{enumerate}[label=(\alph*)]
+  \item Is the model stationary?
+  \item Identify the model as a certain SARIMA model.
+  \end{enumerate}
+\end{Problem}
+
+\begin{solution}\,\\
+  (a)\\
+  We have the characteristic functions
+  \begin{equation}\
+    \begin{aligned}
+      \Phi(B) &= (1-0.8B^{12})\\
+      \phi(B) &= (1-1.6B+0.7B^2)
+    \end{aligned}
+  \end{equation}
+  and
+  \begin{equation}\
+    \begin{aligned}
+      \Phi &= 0.8\\
+      \phi_1 &= 1.6\\
+      \phi_2 &=-0.7
+    \end{aligned}
+  \end{equation}
+We can see that
+  \begin{equation}\
+    \begin{aligned}
+      \Phi_1 &= 0.8 &&< 1\\
+      \phi_1 + \phi_2 &= 0.9 &&< 1\\
+      \phi_2 - \phi_1 &=-2.3 &&< 1\\
+      \left\lvert \phi_2\right\rvert  &= 0.7 &&<1
+    \end{aligned}
+  \end{equation}
+  The roots of the characteristic function are greater than 1 in absolute value. Therefore, the model is stationary.\\
+  \\
+  (b)\\
+  This is a SARIMA\((2,0,0)\times(1,0,0)_{12}\) model with the form
+  \[\phi_{2}(B)\Phi_{1}(B^{12})y_t = a_t
+  \]
+
+
+\end{solution}
+\pagebreak
+
+\begin{Problem}{}
+  Suppose \(y_t=y_{t-4}+a_t\) with 
+  \[y_t=a_t \text{ for }t=1,2,3,4.\]
+  \begin{enumerate}[label=(\alph*)]
+    \item Find the variance function for \(y_t\).
+    \item Find the autocorrelation function for \(y_t\).
+    \item Identify the model for \(y_t\) as a certain SARIMA model.
+    \end{enumerate}
+\end{Problem}
+
+\begin{solution}
+  \begin{equation}\
+    \begin{aligned}
+      y_t &= y_{t-4} + a_t\\
+      &= y_{t-8} + a_{t-4} + a_t\\
+      &= y_{t-12} + a_{t-8} + a_{t-4} + a_t\\
+      &\vdots
+    \end{aligned}
+  \end{equation}
+  Let \(t=4k+i\) where \(i = 1,2,3,4\) and \(k = 0,1,2,3\ldots\)
+  \begin{equation}\
+    \begin{aligned}
+      y_t &= \underset{k+1 \text{ items}}{\underbrace{a_i +a_{4+i} +a_{8+i} +\cdots +a_{4k+i}}}\\
+    \end{aligned}
+  \end{equation}
+  (a)\\
+  \begin{equation}\
+    \begin{aligned}
+      \Var[y_t] &= \Var[a_i +a_{4+i} +a_{8+i} +\cdots +a_{4k+i}]\\
+      &=(k+1)\sigma_a^2
+    \end{aligned}
+  \end{equation}
+  (b)\\
+  Let \(s=4h+j\) where \(j = 1,2,3,4\) and \(h = 0,1,2,3\ldots\)
+  \begin{equation}\
+    \begin{aligned}
+      \Cov[y_t, y_s] &= \Cov[\left\{a_i +a_{4+i} +a_{8+i} +\cdots +a_{4k+i}\right\},\left\{a_j +a_{4+j} +a_{8+j} +\cdots +a_{4h+j}\right\}]\\
+      &=\begin{cases}
+        0 & i\neq j\\
+        (\min{\left\{{h,k}\right\}}+1)\sigma_a^2 & i=j
+      \end{cases}
+    \end{aligned}
+  \end{equation}
+  \begin{equation}\
+    \begin{aligned}
+  \Corr[y_t, y_s] &= \begin{cases}
+    0 & i\neq j\\
+    \frac{\min{\left\{{h,k}\right\}}+1}{\sqrt{(h+1)(k+1)}} & i=j
+  \end{cases}
+\end{aligned}
+\end{equation}
+(c)\\
+This is a SARIMA\((0,0,0)\times(0,1,0)_4\) model with the form
+\[\nabla_4^1 y_t = a_t\]
+
+
+\end{solution}
+
+
+
+\begin{Problem}{}
+
+  Consider the famous time series data “co2” (monthly carbon dioxide through 11 years in Alert, Canada).
+  \begin{enumerate}[label=(\alph*)]
+    \item Fit a deterministic regression model in terms of months and time. Are the regression coefficients     significant? What is the adjusted R-squared? (Note that the month variable should be treated as categorical and transformed into 11 dummy variables.)
+    \item Identify, estimate the SARIMA model for the co2 level.
+    \item Compare the two models above, what do you observe?
+    \end{enumerate}
+\end{Problem}
+
+
+\end{document}
